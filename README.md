@@ -8,7 +8,7 @@ Project Steps:
 First, I'll collect TikTok user data using TikTok's public APIs. I'll gather usernames, followers, likes, and top viewed videos. This data will be collected regularly and stored in Azure Blob Storage.
 
 2. Data Processing:
-Once I have collected the data, I will process it using Databricks. Databricks is a powerful data processing tool that can handle large datasets. I'll clean, transform, and aggregate the data as needed to create meaningful insights.
+Once I have collected the data, I will process it using Azure Databricks. Databricks with Pyspark is a powerful data processing tool that can handle large datasets. I'll clean, transform, and aggregate the data as needed to create meaningful insights.
 
 3. Data Visualization:
 The next step is to create visualizations using Power BI. Power BI is a powerful tool that can create interactive dashboards, reports, and charts. I'll customize the visualizations to meet the specific needs of the project, such as showing the number of followers and likes for each user, the top viewed videos, and the trends over time.
