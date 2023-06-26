@@ -6,7 +6,7 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 def save_user_data(username, user_data):
-    client = MongoClient('mongodb+srv://song:1181750032@cluster0.kiid4gt.mongodb.net/')
+    client = MongoClient('mongodb+srv://<username>:<password>@cluster0.kiid4gt.mongodb.net/')
     db = client['tiktok_data']
     collection = db['tiktok']
     collection.insert_one(user_data)
