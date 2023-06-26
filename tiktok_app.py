@@ -1,14 +1,26 @@
 from flask import Flask, render_template, request
 from bs4 import BeautifulSoup
 import requests
+from pymongo import MongoClient
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import desc
+import pandas as pd
 
 app = Flask(__name__)
+
+def save_user_data(username, user_data):
+    client = MongoClient('mongodb+srv://song:1181750032@cluster0.kiid4gt.mongodb.net/')
+    db = client['tiktok_data']
+    collection = db['tiktok']
+    collection.insert_one(user_data)
 
 def convert_value_to_int(value):
     if value.endswith('K'):
         return int(float(value[:-1]) * 1000)
     elif value.endswith('M'):
         return int(float(value[:-1]) * 1000000)
+    elif value.endswith('B'):
+        return int(float(value[:-1]) * 1000000000)
     elif '.' in value:
         return int(float(value))
     else:
@@ -67,7 +79,15 @@ def home():
                 'Videos': video_data
             }
 
-            return render_template('result.html', user_data=user_data)
+            #save data to MongoDB
+            save_user_data(tiktok_username, user_data)
+            
+            return render_template('result.html',
+                                   total_followers=user_total_followers,
+                                   total_following=user_total_following,
+                                   total_likes=user_total_likes,
+                                   total_views=user_total_views,
+                                   user_data=user_data)
 
         except Exception as e:
             error_message = str(e)
