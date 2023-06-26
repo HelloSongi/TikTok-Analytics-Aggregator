@@ -1,23 +1,54 @@
-# Project Description
 
+# TikTok Analytics Data Engineering Project
 
-A data engineering project for obtaining TikTok user account information and loading it into Azure Blob Storage can have a business premise of conducting market research, improving user engagement, or enhancing the overall TikTok user experience.
+This repository contains a data engineering project that fetches TikTok user data, performs data processing, and stores the results in a MongoDB database. The project is built using Python, Flask, BeautifulSoup, requests, and pymongo.
 
-The project can be divided into three main stages: data collection, data processing, and data analysis.
+## Project Overview
 
-1. Data collection and migration stage: The project would involve scraping the TikTok platform for user account information. This information can include the number of followers, the number of likes, the user's country of origin, and other relevant information. Once the data has been collected, it would be loaded into Azure Blob Storage.
+The TikTok Analytics Data Engineering project aims to collect and analyze user data from the TikTok platform. It provides a web application where users can enter a TikTok username, and the application fetches the user's profile information, including the total number of followers, following, likes, and video views. It also retrieves information about the user's recent videos, such as the video title, views, and a link to watch the video.
 
+The project involves the following main components:
 
-![3](https://github.com/HelloSongi/TikTok-User-data-analysis/assets/69304233/12f58472-c68c-4f3f-afee-ab0446bd9c2b)
+1. **Web Scraping**: The application utilizes the BeautifulSoup library to scrape the TikTok website and extract the required user data. It sends HTTP requests to the TikTok website, parses the HTML response, and extracts the relevant information using CSS selectors.
 
-Use Azcopy function to upload data to azure blob storage
+2. **Data Processing**: The fetched user data is processed and converted into a structured format using pandas/Pyspark. Numeric values, such as follower count, following count, likes, and views, are converted to integers for easier analysis.
 
-```
-azcopy copy "C:\local\path" "https://account.blob.core.windows.net/mycontainer1/?sv=2018-03-28&ss=bjqt&srt=sco&sp=rwddgcup&se=2019-05-01T05:01:17Z&st=2019-04-30T21:01:17Z&spr=https&sig=MGCXiyEzbtttkr3ewJIh2AR8KrghSy1DGM9ovN734bQF4%3D" --recursive=true
-```
+3. **Database Integration**: The processed user data is stored in a MongoDB database using the pymongo library. The MongoDB database provides a flexible and scalable solution for storing and querying the collected TikTok user data.
 
-2. Data processing stage: The data would be aggregated and cleaned using Databricks with Pyspark. This process would involve filtering out any duplicate or irrelevant data, as well as transforming the data into a format that can be easily analyzed.
+4. **Web Application**: The Flask framework is used to develop a web application that allows users to enter a TikTok username. The application fetches the user data, performs data processing, and displays the results on a web page. Users can view the total followers, following, likes, and video views of the TikTok user, as well as their recent video information.
 
-3. Data analysis stage: the cleaned data would be fed into Power BI for analysis. This would allow stakeholders to gain insights into user behavior and preferences, as well as identify areas for improvement in the TikTok platform.
+## Project Structure
 
-Overall, the project would help TikTok better understand its users and improve the overall user experience on the platform.
+The repository structure is organized as follows:
+
+- `tiktok_app.py`: The main Flask application file that handles routing and web request handling.
+- `templates/`: A directory containing HTML templates for the web application's user interface.
+  - `index.html`: The main template for the home page where users can enter a TikTok username.
+  - `result.html`: The template for displaying the fetched user data and analysis results.
+  - `visuals.js`: A javascript(chartjs) file that handles dashboard/visualization
+- `processing_pandas.py`: A python file processing incoming data with pandas
+- `processing_spark.py`: A python file processing data using apache spark
+
+## Getting Started
+
+To run the project locally, follow these steps:
+
+1. Clone the repository: `git clone https://github.com/your-username/tiktok-analytics.git`
+2. Install the required Python packages: `pip install -r requirements.txt`
+3. Update the MongoDB connection string in `tiktok_app.py` with your own MongoDB connection details.
+4. Run the Flask application: `python tiktok_app.py`
+5. Access the web application in your browser at `http://localhost:5000`.
+
+Make sure you have Python, Flask, and the necessary dependencies installed on your system.
+
+## Contributing
+
+Contributions to the project are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+
+---
+
+Feel free to modify and customize this description to suit your specific project details and preferences.
