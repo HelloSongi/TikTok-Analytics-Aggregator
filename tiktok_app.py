@@ -2,9 +2,6 @@ from flask import Flask, render_template, request
 from bs4 import BeautifulSoup
 import requests
 from pymongo import MongoClient
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import desc
-import pandas as pd
 
 app = Flask(__name__)
 
